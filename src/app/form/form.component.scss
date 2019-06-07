@@ -1,0 +1,52 @@
+.padding{
+    padding:20px;
+}
+
+.heading-main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.col-main{
+    padding:20px;
+    border:1px solid #f5f5f5;
+}
+
+.row{
+    width: 100%;
+    margin: 0;
+    padding:20px;
+}
+
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+    border:none;
+    padding:20px;
+}
+
+.example-full-width{
+    width: 100%;
+}
+
+.create-direct{
+    width: 56px;
+    height: 56px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom:20px;
+    right: 20px;
+    border-radius: 100%;
+    cursor: pointer;
+    i{
+        font-size: 28px;
+    }
+  }
+
+  i{
+      cursor: pointer;
+  }

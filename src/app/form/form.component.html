@@ -1,0 +1,50 @@
+<div class="padding">
+  <h5>Form</h5>
+  <br>
+  <div class="card">
+    <form [formGroup]="form">
+      <div class="" formArrayName="entity">
+        <div *ngFor="let comp of form['controls'].entity['controls']; let i=index">
+            <div class="heading-main">
+                <h5>Entity {{i+1}}: </h5>
+                <span>
+                  <i class="zmdi zmdi-delete" (click)="deleteEntity(i)" *ngIf="i>0"></i>
+                </span>
+              </div>
+              <div [formGroupName]="i">
+                <div class="row">
+                    <div class="col-md-2 col-main" *ngFor="let data of singleEntity">
+                        <mat-form-field class="example-full-width">
+                          <input matInput [placeholder]="data?.amount?.name" type="number" [formControlName]="data?.amount.key">
+                        </mat-form-field>
+                        <mat-error *ngIf="form.controls['entity']['controls'][i]['controls'][data?.amount.key].errors?.nan">
+                          Not a number
+                        </mat-error>
+                        <mat-error *ngIf="form.controls['entity']['controls'][i]['controls'][data?.amount.key].errors?.notvalid">
+                          Enter an amount between 10 to 1000
+                        </mat-error>
+                        
+                        <mat-checkbox [formControlName]="data?.currency?.key">{{data?.currency?.name}}</mat-checkbox>
+                      </div>
+                </div>
+                <p>Subtotal: {{subTotal[i]?subTotal[i].amount:0}}</p>
+              </div>
+        </div>
+       
+      </div>
+      <br>
+     <!-- <pre>{{form.value | json}}</pre> -->
+     <div class="text-right">
+      <button class="btn btn-primary" [disabled]="(checkValid?.length>0 || form.invalid)" (click)="submit(form.value)">Save</button>
+     </div>
+    </form>
+  </div>
+  <div>
+    <br>
+    Net Total : {{netTotal}}
+  </div>
+</div>
+
+<div class="create-direct" (click)="addEntity()">
+    <i class="zmdi zmdi-plus-circle"></i>
+  </div>
