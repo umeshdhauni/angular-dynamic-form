@@ -11,23 +11,35 @@
                   <i class="zmdi zmdi-delete" (click)="deleteEntity(i)" *ngIf="i>0"></i>
                 </span>
               </div>
+              
               <div [formGroupName]="i">
+                  <div>
+                      <mat-form-field class="padding-horizontal">
+                        <input matInput placeholder="Input" type="text" formControlName="box">
+                        <mat-error *ngIf="form.controls['entity']['controls'][i]['controls']['box'].errors?.notvalid">
+                            Enter number between 0000 to 9999
+                          </mat-error> 
+                      </mat-form-field>
+                    </div>
                 <div class="row">
-                    <div class="col-md-2 col-main" *ngFor="let data of singleEntity">
+                    <div class="col-md-3 col-main" *ngFor="let data of amounts">
                         <mat-form-field class="example-full-width">
-                          <input matInput [placeholder]="data?.amount?.name" type="number" [formControlName]="data?.amount.key">
+                          <input matInput [placeholder]="data?.label" type="number" [formControlName]="data?.key">
+                          <mat-error *ngIf="form.controls['entity']['controls'][i]['controls'][data?.key].errors?.nan">
+                            Not a number
+                          </mat-error>
+                          <mat-error *ngIf="form.controls['entity']['controls'][i]['controls'][data?.key].errors?.notvalid">
+                            Enter an amount between 10 to 1000
+                          </mat-error>  
                         </mat-form-field>
-                        <mat-error *ngIf="form.controls['entity']['controls'][i]['controls'][data?.amount.key].errors?.nan">
-                          Not a number
-                        </mat-error>
-                        <mat-error *ngIf="form.controls['entity']['controls'][i]['controls'][data?.amount.key].errors?.notvalid">
-                          Enter an amount between 10 to 1000
-                        </mat-error>
-                        
-                        <mat-checkbox [formControlName]="data?.currency?.key">{{data?.currency?.name}}</mat-checkbox>
                       </div>
                 </div>
-                <p>Subtotal: {{subTotal[i]?subTotal[i].amount:0}}</p>
+                <div class="row">
+                  <div class="col-md-2" *ngFor="let data of checkboxes">
+                    <mat-checkbox [formControlName]="data?.key">{{data?.label}}</mat-checkbox>
+                  </div>
+                </div>
+                <p>Subtotal: {{totalArray[i]?totalArray[i].subTotal:0}}</p>
               </div>
         </div>
        
@@ -35,7 +47,7 @@
       <br>
      <!-- <pre>{{form.value | json}}</pre> -->
      <div class="text-right">
-      <button class="btn btn-primary" [disabled]="(checkValid?.length>0 || form.invalid)" (click)="submit(form.value)">Save</button>
+      <button class="btn btn-primary" [disabled]="(checkValid?.length > 0 || form.invalid)" (click)="submit(form.value)">Save</button>
      </div>
     </form>
   </div>
