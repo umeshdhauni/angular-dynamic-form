@@ -195,7 +195,8 @@ export class FormComponent implements OnInit {
 
 
   submit(data) {
-    console.log(data);
+    console.log('formData',data);
+    console.log('netTotal',this.netTotal);
   }
 
 }
