@@ -3,14 +3,15 @@ import { FormBuilder, FormArray, Validators, FormControl, AbstractControl } from
 import { Observable } from 'rxjs';
 
 function positiveNumber(control: AbstractControl): { [key: string]: boolean } | null {
-  // console.log(control.value)
-
   if ((String(control.value) == '' || String(control.value) == 'null')) {
     return null;
   }
   else if ((isNaN(control.value))) {
     return { 'nan': true };
   }
+  // else if(String(control.value)[control.value-1] == '.'){
+  //   console.log('hey')
+  // }
   else if ((control.value < 10 || control.value > 1000)) {
     return { 'notvalid': true }
   }
@@ -119,12 +120,12 @@ export class FormComponent implements OnInit {
           amount2: ['', positiveNumber],
           amount3: ['', positiveNumber],
           amount4: ['', positiveNumber],
-          c1: [''],
-          c2: [''],
-          c3: [''],
-          c4: [''],
-          c5: [''],
-          c6: [''],
+          c1: [false],
+          c2: [false],
+          c3: [false],
+          c4: [false],
+          c5: [false],
+          c6: [false],
           box: ['',limitNumber],
           subTotal:['']
         })
@@ -176,12 +177,12 @@ export class FormComponent implements OnInit {
         amount2: ['', positiveNumber],
         amount3: ['', positiveNumber],
         amount4: ['', positiveNumber],
-        c1: [''],
-        c2: [''],
-        c3: [''],
-        c4: [''],
-        c5: [''],
-        c6: [''],
+        c1: [false],
+        c2: [false],
+        c3: [false],
+        c4: [false],
+        c5: [false],
+        c6: [false],
         box: ['',limitNumber],
         subTotal:['']
       })

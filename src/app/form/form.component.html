@@ -15,7 +15,7 @@
               <div [formGroupName]="i">
                   <div>
                       <mat-form-field class="padding-horizontal">
-                        <input matInput placeholder="Input" type="text" formControlName="box">
+                        <input matInput placeholder="Input" type="text" formControlName="box" onkeypress="return event.charCode >= 48 && event.charCode <= 57" step="1">
                         <mat-error *ngIf="form.controls['entity']['controls'][i]['controls']['box'].errors?.notvalid">
                             Enter number between 0000 to 9999
                           </mat-error> 
@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-md-3 col-main" *ngFor="let data of amounts">
                         <mat-form-field class="example-full-width">
-                          <input matInput [placeholder]="data?.label" type="number" [formControlName]="data?.key">
+                          <input matInput [placeholder]="data?.label" type="number" [formControlName]="data?.key" onkeypress="return event.charCode >= 48 && event.charCode <= 57" step="1">
                           <mat-error *ngIf="form.controls['entity']['controls'][i]['controls'][data?.key].errors?.nan">
                             Not a number
                           </mat-error>
