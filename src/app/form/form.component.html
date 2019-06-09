@@ -19,6 +19,9 @@
                         <mat-error *ngIf="form.controls['entity']['controls'][i]['controls']['box'].errors?.notvalid">
                             Enter number between 0000 to 9999
                           </mat-error> 
+                          <mat-error *ngIf="form.controls['entity']['controls'][i]['controls']['box'].errors?.require && (form.controls['entity']['controls'][i]['controls']['box']?.dirty || form.controls['entity']['controls'][i]['controls']['box']?.touched)">
+                            Input is required
+                          </mat-error> 
                       </mat-form-field>
                     </div>
                 <div class="row">
@@ -39,13 +42,14 @@
                     <mat-checkbox [formControlName]="data?.key">{{data?.label}}</mat-checkbox>
                   </div>
                 </div>
-                <p>Subtotal: {{totalArray[i]?totalArray[i].subTotal:0}}</p>
+                <div *ngIf="form.value.entity[i].subTotal">Subtotal: {{form.value.entity[i].subTotal | currency:'INR'}}</div>
+                <div *ngIf="!form.value.entity[i].subTotal">Subtotal: {{0 | currency:'INR'}}</div>
               </div>
         </div>
        
       </div>
       <br>
-     <!-- <pre>{{form.value | json}}</pre> -->
+      <!-- <pre>{{form.value |json}}</pre> -->
      <div class="text-right">
       <button class="btn btn-primary" [disabled]="(checkValid?.length > 0 || form.invalid)" (click)="submit(form.value)">Save</button>
      </div>
@@ -53,7 +57,7 @@
   </div>
   <div>
     <br>
-    Net Total : {{netTotal}}
+    Net Total : {{netTotal | currency:'INR'}}
   </div>
 </div>
 
